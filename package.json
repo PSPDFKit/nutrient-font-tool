@@ -27,5 +27,6 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest"
-  }
+  },
+  "homepage": "https://www.nutrient.io/guides/web/forms/fill-form-fields/dynamic-font-loading/"
 }
