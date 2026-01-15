@@ -2,6 +2,8 @@
 
 Generate `fonts.json` metadata for Nutrient PDF SDK font bundles.
 
+📖 **Guide**: [Dynamic Font Loading in Nutrient Web SDK](https://www.nutrient.io/guides/web/forms/fill-form-fields/dynamic-font-loading/)
+
 ## Installation
 
 ```bash
@@ -69,6 +71,11 @@ Generates a `fonts.json` file with font metadata:
 ## Requirements
 
 - Node.js 18+
+
+## Learn More
+
+- [Dynamic Font Loading Guide](https://www.nutrient.io/guides/web/forms/fill-form-fields/dynamic-font-loading/) — How to use custom font bundles with Nutrient Web SDK
+- [Nutrient Web SDK](https://www.nutrient.io/sdk/web/) — PDF SDK for web applications
 
 ## License
 
