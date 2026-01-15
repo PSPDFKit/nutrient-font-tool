@@ -74,4 +74,25 @@ describe('createBundle', () => {
     
     expect(result.fontsProcessed).toBe(1);
   });
+
+  it('should include subdirectory in filePath for nested fonts', async () => {
+    // Create nested structure with known subdirectory
+    const nestedDir = path.join(__dirname, 'output', 'nested-path-test');
+    const subDir = path.join(nestedDir, 'my-subfolder');
+    await fs.mkdir(subDir, { recursive: true });
+    await fs.copyFile(
+      path.join(fixturesDir, 'Anton-Regular.ttf'),
+      path.join(subDir, 'Anton-Regular.ttf')
+    );
+    
+    const nestedOutput = path.join(__dirname, 'output', 'nested-path-fonts.json');
+    await createBundle(nestedDir, nestedOutput);
+    
+    const content = await fs.readFile(nestedOutput, 'utf-8');
+    const json = JSON.parse(content);
+    
+    // filePath should include the subdirectory
+    const font = json.availableFonts[0];
+    expect(font.filePath).toBe('my-subfolder/Anton-Regular.ttf');
+  });
 });
