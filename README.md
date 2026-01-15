@@ -15,10 +15,11 @@ npm install -g github:PSPDFKit/nutrient-font-tool
 ## Usage
 
 ```bash
-# Generate fonts.json in current directory
+# Generate fonts.json inside the font directory
 nutrient-font-tool create ./my-fonts
+# → ./my-fonts/fonts.json
 
-# Specify output path
+# Specify custom output path
 nutrient-font-tool create ./my-fonts -o ./output/fonts.json
 
 # Pretty-print the JSON
@@ -31,7 +32,7 @@ The tool recursively scans the input directory for font files.
 
 | Option | Description |
 |--------|-------------|
-| `-o, --output <file>` | Output file (default: `fonts.json`) |
+| `-o, --output <file>` | Output file (default: `<input-dir>/fonts.json`) |
 | `--pretty` | Pretty-print JSON output |
 
 ## Supported Formats

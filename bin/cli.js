@@ -9,7 +9,7 @@ const usage = `Usage:
   nutrient-font-tool --version
 
 Options:
-  -o, --output <file>  Output file (default: fonts.json)
+  -o, --output <file>  Output file (default: <input-dir>/fonts.json)
   --pretty             Pretty-print JSON output
 `;
 
@@ -30,7 +30,7 @@ function parseCreateArgs(args) {
     throw new Error("Missing <input-dir> for create command.");
   }
 
-  let outputPath = "fonts.json";
+  let outputPath = null; // Will default to inputDir/fonts.json
   let pretty = false;
 
   for (let index = 1; index < args.length; index += 1) {
@@ -62,7 +62,9 @@ function parseCreateArgs(args) {
 }
 
 async function runCreate(args) {
-  const { inputDir, outputPath, options } = parseCreateArgs(args);
+  const { inputDir, outputPath: customOutput, options } = parseCreateArgs(args);
+  // Default output is inputDir/fonts.json
+  const outputPath = customOutput ?? `${inputDir}/fonts.json`;
   const result = await createBundle(inputDir, outputPath, options);
   console.log(`Created ${result.outputPath} with ${result.fontsProcessed} fonts`);
 }
