@@ -1,12 +1,12 @@
 # nutrient-font-tool
 
-Create dynamic font bundles for Nutrient PDF SDK.
+Generate `fonts.json` metadata for Nutrient PDF SDK font bundles.
 
 ## Installation
 
 ```bash
 # Run directly (no install needed)
-npx github:PSPDFKit/nutrient-font-tool create ./my-fonts -o ./bundle
+npx github:PSPDFKit/nutrient-font-tool create ./my-fonts
 
 # Or install globally
 npm install -g github:PSPDFKit/nutrient-font-tool
@@ -15,23 +15,25 @@ npm install -g github:PSPDFKit/nutrient-font-tool
 ## Usage
 
 ```bash
-# Basic usage
-nutrient-font-tool create <input-dir> -o <output-dir>
+# Generate fonts.json inside the font directory
+nutrient-font-tool create ./my-fonts
+# → ./my-fonts/fonts.json
 
-# With options
-nutrient-font-tool create ./fonts -o ./bundle --pretty --zip
+# Specify custom output path
+nutrient-font-tool create ./my-fonts -o ./output/fonts.json
 
-# Help
-nutrient-font-tool --help
+# Pretty-print the JSON
+nutrient-font-tool create ./my-fonts --pretty
 ```
+
+The tool recursively scans the input directory for font files.
 
 ### Options
 
 | Option | Description |
 |--------|-------------|
-| `-o, --output <dir>` | Output directory (required) |
-| `--pretty` | Pretty-print fonts.json |
-| `--zip` | Also create a .zip bundle |
+| `-o, --output <file>` | Output file (default: `<input-dir>/fonts.json`) |
+| `--pretty` | Pretty-print JSON output |
 
 ## Supported Formats
 
@@ -42,12 +44,7 @@ nutrient-font-tool --help
 
 ## Output
 
-The tool creates a font bundle directory containing:
-
-- All input font files (copied)
-- `fonts.json` - Font metadata for Nutrient PDF SDK
-
-### fonts.json Structure
+Generates a `fonts.json` file with font metadata:
 
 ```json
 {

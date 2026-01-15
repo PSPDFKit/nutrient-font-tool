@@ -4,9 +4,13 @@ import fs from "fs/promises";
 import { createBundle } from "../lib/bundle.js";
 
 const usage = `Usage:
-  nutrient-font-tool create <input-dir> -o <output-dir> [--pretty] [--zip]
+  nutrient-font-tool create <input-dir> [-o <output-file>] [--pretty]
   nutrient-font-tool --help
   nutrient-font-tool --version
+
+Options:
+  -o, --output <file>  Output file (default: <input-dir>/fonts.json)
+  --pretty             Pretty-print JSON output
 `;
 
 async function printVersion() {
@@ -26,9 +30,8 @@ function parseCreateArgs(args) {
     throw new Error("Missing <input-dir> for create command.");
   }
 
-  let outputDir;
+  let outputPath = null; // Will default to inputDir/fonts.json
   let pretty = false;
-  let zip = false;
 
   for (let index = 1; index < args.length; index += 1) {
     const arg = args[index];
@@ -38,7 +41,7 @@ function parseCreateArgs(args) {
       if (!value) {
         throw new Error("Missing value for -o/--output option.");
       }
-      outputDir = value;
+      outputPath = value;
       index += 1;
       continue;
     }
@@ -48,29 +51,22 @@ function parseCreateArgs(args) {
       continue;
     }
 
-    if (arg === "--zip") {
-      zip = true;
-      continue;
-    }
-
     throw new Error(`Unknown option: ${arg}`);
-  }
-
-  if (!outputDir) {
-    throw new Error("Missing -o/--output for create command.");
   }
 
   return {
     inputDir,
-    outputDir,
-    options: { pretty, zip },
+    outputPath,
+    options: { pretty },
   };
 }
 
 async function runCreate(args) {
-  const { inputDir, outputDir, options } = parseCreateArgs(args);
-  const result = await createBundle(inputDir, outputDir, options);
-  console.log(`Created bundle with ${result.fontsProcessed} fonts at ${result.outputPath}`);
+  const { inputDir, outputPath: customOutput, options } = parseCreateArgs(args);
+  // Default output is inputDir/fonts.json
+  const outputPath = customOutput ?? `${inputDir}/fonts.json`;
+  const result = await createBundle(inputDir, outputPath, options);
+  console.log(`Created ${result.outputPath} with ${result.fontsProcessed} fonts`);
 }
 
 async function main() {
