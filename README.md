@@ -8,10 +8,10 @@ Generate `fonts.json` metadata for Nutrient PDF SDK font bundles.
 
 ```bash
 # Run directly (no install needed)
-npx github:PSPDFKit/nutrient-font-tool create ./my-fonts
+npx @nutrient-sdk/font-tool create ./my-fonts
 
 # Or install globally
-npm install -g github:PSPDFKit/nutrient-font-tool
+npm install -g @nutrient-sdk/font-tool
 ```
 
 ## Usage
