@@ -1,0 +1,22 @@
+{
+  "name": "nutrient-font-tool",
+  "version": "0.1.0",
+  "description": "Create dynamic font bundles for Nutrient PDF SDK",
+  "type": "module",
+  "bin": {
+    "nutrient-font-tool": "./bin/cli.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "archiver": "^7.0.0"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "wasm/"
+  ],
+  "keywords": ["font", "pdf", "nutrient", "pspdfkit"],
+  "license": "MIT"
+}
